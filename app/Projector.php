@@ -8,7 +8,7 @@ class Projector extends Model
 {
     //
     protected $fillable =[
-        'id','name','serial','booking_duration'
+        'id','name','serial','booking_duration','department_id'
     ];
 
     public function department()

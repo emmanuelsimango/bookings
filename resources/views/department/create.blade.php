@@ -4,7 +4,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ __('Add Projector') }}</h5>
+                    <h5 class="title">{{ __('Add Department') }}</h5>
                 </div>
                 <form method="post" action="{{ !empty($department)?route('profile.update'):route('department.store') }}" autocomplete="off">
                     <div class="card-body">

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Role;
+use Illuminate\Http\Request;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -13,9 +16,14 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('profile.edit');
+
+
+        $user = User::find($request->id);
+
+        // return $user;
+        return view('profile.edit',['user'=>$user,'roles'=>Role::orderBy('name')->get()]);
     }
 
     /**
@@ -26,7 +34,17 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
-        auth()->user()->update($request->all());
+
+        $user = User::find($request->id);
+        // return $request;
+        $user->update([
+            'role_id'=>$request->role_id,
+            'email'=>$request->email,
+            'name'=>$request->name,
+            ]);
+        // $user->isDirty();
+
+        // return $user->name;
 
         return back()->withStatus(__('Profile successfully updated.'));
     }
@@ -39,7 +57,13 @@ class ProfileController extends Controller
      */
     public function password(PasswordRequest $request)
     {
-        auth()->user()->update(['password' => Hash::make($request->get('password'))]);
+        // return $request;
+        if($request->old_password){
+            auth()->user()->update(['password' => Hash::make($request->get('password'))]);
+        }else{
+            $user = User::find($request->id);
+            $user->update(['password' => Hash::make($request->get('password'))]);
+        }
 
         return back()->withPasswordStatus(__('Password successfully updated.'));
     }

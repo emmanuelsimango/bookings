@@ -21,7 +21,7 @@
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile') class="active " @endif>
-                            <a href="{{ route('profile.edit')  }}">
+                            <a href="{{ route('profile.edit',['id'=>auth()->user()->id])  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ __('Profile ') }}</p>
                             </a>
