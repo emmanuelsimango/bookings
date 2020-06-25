@@ -11,6 +11,12 @@
                     <p>{{ __('Dashboard') }}</p>
                 </a>
             </li>
+            <li @if ($pageSlug == 'booking') class="active " @endif>
+                <a href="{{ route('booking') }}">
+                    <i class="tim-icons icon-planet"></i>
+                    <p>{{ __('Bookings') }}</p>
+                </a>
+            </li>
             <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
@@ -18,7 +24,7 @@
                     <b class="caret mt-1"></b>
                 </a>
 
-                <div class="collapse show" id="laravel-examples">
+                <div class="collapse" id="laravel-examples">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile') class="active " @endif>
                             <a href="{{ route('profile.edit',['id'=>auth()->user()->id])  }}">

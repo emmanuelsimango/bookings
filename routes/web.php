@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
 		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'PageController@notifications']);
-		Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'PageController@rtl']);
+		Route::resource('booking','BookingController',['names'=>['index'=>'booking']]);
 		Route::resource('projector', 'ProjectorController',['names'=>['index'=>'projector']]);
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
 		Route::resource('department','DepartmentController',['names'=>['index'=>'department']]);
