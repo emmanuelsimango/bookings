@@ -15,6 +15,10 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->integer('projector_id');
+            $table->integer('approved_by');
+            $table->integer('user_id');
+            $table->integer('returned_to')->default('0');
             $table->timestamps();
         });
     }

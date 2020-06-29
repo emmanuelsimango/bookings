@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Role;
@@ -20,7 +21,7 @@ class ProfileController extends Controller
     {
 
 
-        $user = User::find($request->id);
+        $user = $request->id?User::find($request->id):Auth::user();
 
         // return $user;
         return view('profile.edit',['user'=>$user,'roles'=>Role::orderBy('name')->get()]);

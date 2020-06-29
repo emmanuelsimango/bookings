@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\User;
+use App\Projector;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -15,6 +18,22 @@ class BookingController extends Controller
     public function index()
     {
         //
+        $projectors = Projector::all();
+        foreach ($projectors as $index=>$projector) {
+            $projector->department;
+            $projector->is_booked = $projector->isBooked(Booking::where(['projector_id'=>$projector->id])->get());
+            // if ($projector->is_booked) {
+            //     unset($projectors[$index]);
+            // }
+        }
+        // $pf = array_values($projectors);
+        $staff = User::where('id','!=',Auth::user()->id)->get();
+        $bookings = Booking::where(['returned_to'=>'0'])->orderBy('id','desc')->get();
+        foreach ($bookings as $booking) {
+            $booking->approved;
+            $booking->projector;
+        }
+        return view('projector.book',['projectors'=>$projectors,'bookings'=>$bookings,"staff"=>$staff]);
     }
 
     /**
@@ -36,6 +55,14 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         //
+        $validData = $request->validate([
+            'user_id'=>'required',
+            'projector_id'=>'required',
+        ]);
+        $validData['approved_by'] = Auth::user()->id;
+        $booking = Booking::create($validData);
+
+        return back()->withStatus('Projector Booked');
     }
 
     /**
@@ -70,6 +97,10 @@ class BookingController extends Controller
     public function update(Request $request, Booking $booking)
     {
         //
+        $booking->returned_to = Auth::user()->id;
+        $booking->save();
+
+        return back()->withStatus('Booking Updated');
     }
 
     /**
