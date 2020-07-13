@@ -102,7 +102,7 @@
                         <div class="block block-three"></div>
                         <div class="block block-four"></div>
                         <a href="#">
-                            <img class="avatar" src="{{ asset('black') }}/img/emilyz.jpg" alt="">
+                            <img class="avatar" src="{{ asset('black') }}/img/user.jpg" alt="">
                             <h5 class="title">{{ $user->name }}</h5>
                         </a>
                         <p class="description">
