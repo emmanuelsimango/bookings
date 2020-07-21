@@ -30,21 +30,32 @@
                             placeholder="{{ __('Email address') }}" value="{{ old('email', $user->email??'') }}">
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
-                    <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
-                        <label>{{ __('Role') }}</label>
+                    @if($user->role_id==1)
+                        <div class="form-group{{ $errors->has('department_id') ? ' has-danger' : '' }}">
+                            <label>{{ __('Department') }}</label>
+                            <select id="department_id" value="{{ old('department_id', $user->department_id??'') }}" class="form-control{{ $errors->has('department_id') ? ' is-invalid' : '' }}" name="department_id">
+                                @foreach ($departments as $dept)
+                                    <option class="text-muted" value="{{ $dept->id }}">{{ $dept->name }}</option>
+                                @endforeach
+                            </select>
+                            @include('alerts.feedback', ['field' => 'department_id'])
+                        </div>
+                        <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
+                            <label>{{ __('Role') }}</label>
 
-                        <select id="role_id" class="form-control form-select" name="role_id">
-                            @foreach ($roles as $item)
-                            <option value="{{ $item->id }}" selected="{{ $item->id===$user->id?true:false}}">{{ $item->name }}</option>
+                            <select id="role_id" value="{{ old('role_id', $user->role_id??'') }}" class="form-control form-select" name="role_id">
+                                @foreach ($roles as $item)
+                                <option class="text-muted" value="{{ $item->id }}" selected="{{ $item->id===$user->id?true:false}}">{{ $item->name }}</option>
 
-                            @endforeach
-                        </select>
+                                @endforeach
+                            </select>
 
-                        {{-- <input type="role" name="role"
-                            class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}"
-                            placeholder="{{ __('Email address') }}" value="{{ old('email', $user->email??'') }}"> --}}
-                        @include('alerts.feedback', ['field' => 'role'])
-                    </div>
+                            {{-- <input type="role" name="role"
+                                class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}"
+                                placeholder="{{ __('Email address') }}" value="{{ old('email', $user->email??'') }}"> --}}
+                            @include('alerts.feedback', ['field' => 'role'])
+                        </div>
+                    @endif
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-fill btn-primary">{{ __('Save') }}</button>
@@ -107,6 +118,8 @@
                         </a>
                         <p class="description">
                             {{ ucfirst($user->role->name) }}
+                            <br/>
+                            {{ ucfirst($user->department->name) }} Department
                         </p>
                     </div>
                 </p>

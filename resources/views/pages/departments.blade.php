@@ -38,7 +38,7 @@
                     <td>
                         {{ $dept->name }}
                     </td>
-                    <td>
+                    <td class="text-center">
                     {{ $dept->projectors()->count() }}
                     </td>
                     </tr>

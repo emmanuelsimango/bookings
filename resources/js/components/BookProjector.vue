@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-5" >
       <div class="card">
         <div class="card-header">Projectors</div>
         <div class="card-body">
@@ -73,12 +73,7 @@
             </span>
           </v-client-table>
 
-          <!-- Button trigger modal
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
-                  Launch
-          </button>-->
 
-          <!-- Modal -->
           <div
             class="modal modal-black fade"
             id="book"

@@ -9,6 +9,7 @@ use App\Http\Requests\PasswordRequest;
 use App\Role;
 use Illuminate\Http\Request;
 use App\User;
+use App\Department;
 
 class ProfileController extends Controller
 {
@@ -24,7 +25,7 @@ class ProfileController extends Controller
         $user = $request->id?User::find($request->id):Auth::user();
 
         // return $user;
-        return view('profile.edit',['user'=>$user,'roles'=>Role::orderBy('name')->get()]);
+        return view('profile.edit',['user'=>$user,'roles'=>Role::orderBy('name')->get(),'departments'=>Department::all()]);
     }
 
     /**
@@ -38,11 +39,7 @@ class ProfileController extends Controller
 
         $user = User::find($request->id);
         // return $request;
-        $user->update([
-            'role_id'=>$request->role_id,
-            'email'=>$request->email,
-            'name'=>$request->name,
-            ]);
+        $user->update($request->all());
         // $user->isDirty();
 
         // return $user->name;

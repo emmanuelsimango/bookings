@@ -31,4 +31,8 @@ class Projector extends Model
         return false;
     }
 
+    public function available(){
+        return $this->hasOne(Booking::class)->where("returned_to",0);
+    }
+
 }

@@ -17,7 +17,7 @@
 
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <label>{{ __('Name') }}</label>
-                                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}">
+                                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name')}}">
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
 
@@ -34,11 +34,11 @@
                             </div>
                             <div class="form-group{{ $errors->has('department_id') ? ' has-danger' : '' }}">
                                 <label>{{ __('Department') }}</label>
-                                    <select id="department_id" class="form-control{{ $errors->has('department_id') ? ' is-invalid' : '' }}" name="department_id">
-                                        @foreach ($departments as $dept)
-                                            <option value="{{ $dept->id }}">{{ $dept->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <select id="department_id" class="form-control{{ $errors->has('department_id') ? ' is-invalid' : '' }}" name="department_id">
+                                    @foreach ($departments as $dept)
+                                        <option class="text-muted" value="{{ $dept->id }}">{{ $dept->name }}</option>
+                                    @endforeach
+                                </select>
 
                                 {{-- <input type="number" name="department_id" class="form-control{{ $errors->has('department_id') ? ' is-invalid' : '' }}" placeholder="{{ __('Department') }}" value="{{ old('department_id') }}"> --}}
                                 @include('alerts.feedback', ['field' => 'department_id'])
@@ -63,14 +63,10 @@
                                 {{-- <img class="avatar" src="{{ asset('black') }}/img/emilyz.jpg" alt=""> --}}
                                 <h5 class="title">{{ auth()->user()->name }}</h5>
                             </a>
-                            <p class="description">
-                                {{ __('Ceo/Co-Founder') }}
-                            </p>
+
                         </div>
                     </p>
-                    <div class="card-description">
-                        {{ __('Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...') }}
-                    </div>
+
                 </div>
                 <div class="card-footer">
                     <div class="button-container">
