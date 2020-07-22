@@ -9,15 +9,9 @@
                     <div class="card-header card-header-primary row">
                         <div class="col-8">
 
-                            <h4 class="card-title ">Projectors</h4>
-                            <p class="card-category"> Here is a list of all projectors</p>
+                            <h4 class="card-title ">List of projectors requests</h4>
+                            <p class="card-category"> </p>
                         </div>
-                        @if(Auth::user()->role_id==1)
-                            <div class="col-4 text-right">
-                                <a href="{{ route('projector.create') }}" class="btn btn-sm btn-primary">Add Projector</a>
-                            </div>
-                        @endif
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -27,16 +21,16 @@
                                         #
                                     </th>
                                     <th>
-                                        Name
+                                        Projector
                                     </th>
                                     <th>
-                                        Serial
+                                        Projector department
                                     </th>
                                     <th>
-                                        Department
+                                        User name
                                     </th>
                                     <th>
-                                        Availability
+                                        User department
                                     </th>
                                     <th>
                                         Action
@@ -44,31 +38,29 @@
 
                                 </thead>
                                 <tbody>
-                                    @foreach ($projectors as $index=>$projector)
+                                    @foreach ($data as $index=>$request)
 
                                     <tr>
                                         <td>
                                             {{ ++$index }}
                                         </td>
                                         <td>
-                                            {{ $projector->name }}
+                                            {{ $request->projector->name }}
                                         </td>
                                         <td>
-                                            {{ $projector->serial }}
+                                            {{ $request->projector->department->name }}
                                         </td>
                                         <td>
-                                            {{ $projector->department->name??'' }}
+                                            {{ $request->booker->name}}
                                         </td>
                                         <td>
-                                            {{ $projector->available==null? 'Available':'Booked' }}
+                                            {{ $request->booker->department->name}}
                                         </td>
                                         <td>
-                                            @if($projector->available==null)
-                                                @if(Auth::user()->role_id==1)
-                                                    [{{count($projector->requests)}}]<a href="booking/requests/{{ $projector->id }}">Requests</a>
-                                                @else
-                                                    <a href="projector/request/{{ $projector->id }}">Book the projector</a>
-                                                @endif
+                                            @if($request->projector->available==null)
+                                                <a class="btn btn-primary btn-sm" href="/booking/approve/{{$request->id}}">Approve this</a>
+
+                                                <a class="btn btn-danger btn-sm" href="/booking/reject/{{$request->id}}">Reject this</a>
                                             @else
                                                 <strong>Not available</strong>
                                             @endif
@@ -79,7 +71,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $projectors->links() }}
                     </div>
                 </div>
             </div>

@@ -51,11 +51,28 @@
                     <p>{{ __('Projectors') }}</p>
                 </a>
             </li>
+            @if(Auth::user()->role_id>1)
+                <li @if ($pageSlug == 'myProjectors') class="active " @endif>
+                    <a href="/myProjectors">
+                        <i class="tim-icons icon-planet"></i>
+                        <p>{{ __('My projectors') }}</p>
+                    </a>
+                </li>
+            @endif
             @if(Auth::user()->role_id==1)
                 <li @if ($pageSlug == 'department') class="active " @endif>
                     <a href="{{ route('department') }}">
                         <i class="tim-icons icon-atom"></i>
                         <p>{{ __('Departments') }}</p>
+                    </a>
+                </li>
+            @endif
+
+            @if(Auth::user()->role_id==1)
+                <li @if ($pageSlug == 'reports') class="active " @endif>
+                    <a href="/reports">
+                        <i class="tim-icons icon-atom"></i>
+                        <p>{{ __('Reports') }}</p>
                     </a>
                 </li>
             @endif

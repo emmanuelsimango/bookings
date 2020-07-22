@@ -46,6 +46,15 @@
                               {{ $message}}</span>
                           </div>
                           @endif
+                        @if($message = Session::get('status') )
+                        <div class="alert alert-success ">
+                            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                              <i class="tim-icons icon-simple-remove"></i>
+                            </button>
+                            <span>
+                              {{ $message}}</span>
+                          </div>
+                          @endif
                         @yield('content')
                     </div>
 
@@ -61,6 +70,7 @@
                 <div class="full-page {{ $contentClass ?? '' }}">
                     <div class="content">
                         <div class="container">
+
 
                             @yield('content')
                         </div>

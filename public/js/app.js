@@ -2107,33 +2107,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["projectors", "staff", "bookings"],
   mounted: function mounted() {
@@ -22458,81 +22431,54 @@ var render = function() {
                   fn: function(ref) {
                     var row = ref.row
                     return _c("span", { key: row.id }, [
-                      _c("div", { staticClass: "dropdown" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-sm btn-icon-only text-light",
-                            attrs: {
-                              href: "#",
-                              role: "button",
-                              "data-toggle": "dropdown",
-                              "aria-haspopup": "true",
-                              "aria-expanded": "false"
+                      _c(
+                        "span",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.selectedBooking = row
                             }
-                          },
-                          [_c("i", { staticClass: "fas fa-ellipsis-v" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "dropdown-menu dropdown-menu-right dropdown-menu-arrow"
-                          },
-                          [
-                            _c(
-                              "span",
-                              {
-                                staticClass: "dropdown-item",
-                                on: {
-                                  click: function($event) {
-                                    _vm.selectedBooking = row
-                                  }
+                          }
+                        },
+                        [
+                          _c(
+                            "form",
+                            {
+                              attrs: {
+                                action: "booking/" + row.id,
+                                method: "post"
+                              }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "hidden",
+                                  name: "_method",
+                                  value: "put"
                                 }
-                              },
-                              [
-                                _c(
-                                  "form",
-                                  {
-                                    attrs: {
-                                      action: "booking/" + row.id,
-                                      method: "post"
-                                    }
-                                  },
-                                  [
-                                    _c("input", {
-                                      attrs: {
-                                        type: "hidden",
-                                        name: "_method",
-                                        value: "put"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      attrs: { type: "hidden", name: "_token" },
-                                      domProps: { value: _vm.csrf }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-link",
-                                        attrs: { type: "submit" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                      Recieve\n                  "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ])
+                              }),
+                              _vm._v(" "),
+                              _c("input", {
+                                attrs: { type: "hidden", name: "_token" },
+                                domProps: { value: _vm.csrf }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary btn-sm",
+                                  attrs: { type: "submit" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                      Recieve\n                  "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
                     ])
                   }
                 }
@@ -22573,56 +22519,29 @@ var render = function() {
                         fn: function(ref) {
                           var row = ref.row
                           return _c("span", { key: row.id }, [
-                            _c("div", { staticClass: "dropdown" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn btn-sm btn-icon-only text-light",
-                                  attrs: {
-                                    href: "#",
-                                    role: "button",
-                                    "data-toggle": "dropdown",
-                                    "aria-haspopup": "true",
-                                    "aria-expanded": "false"
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-primary btn-sm",
+                                attrs: {
+                                  "data-toggle": "modal",
+                                  "data-target": "#book"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectedProjector = row
                                   }
-                                },
-                                [_c("i", { staticClass: "fas fa-ellipsis-v" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "dropdown-menu dropdown-menu-right dropdown-menu-arrow"
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "dropdown-item",
-                                      attrs: {
-                                        "data-toggle": "modal",
-                                        "data-target": "#book"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.selectedProjector = row
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Book")]
-                                  )
-                                ]
-                              )
-                            ])
+                                }
+                              },
+                              [_vm._v("Book")]
+                            )
                           ])
                         }
                       }
                     ],
                     null,
                     false,
-                    3447894577
+                    240902309
                   )
                 })
               : _vm._e(),
@@ -42492,7 +42411,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/BookProjector.vue?vue&type=template&id=10a60bf8& ***!
   \**********************************************************************************/
-/*! no static exports found */
+/*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42593,8 +42512,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Projects\bookings\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Projects\bookings\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Emmanuel\Documents\Milton Staff\bookings\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Emmanuel\Documents\Milton Staff\bookings\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

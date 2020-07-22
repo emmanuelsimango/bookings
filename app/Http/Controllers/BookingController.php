@@ -65,6 +65,50 @@ class BookingController extends Controller
         return back()->withStatus('Projector Booked');
     }
 
+    public function request(Request $request,$id)
+    {
+        $booking0 = Booking::where(['user_id'=>Auth::user()->id,'projector_id'=>$id,"approved_by"=>0])->get();
+        if($booking0!=null && count($booking0)>0){
+            // return json_encode($booking0);
+            return back()->withError('You have already submited request for this projector');
+        }
+        $booking = Booking::create([
+            'user_id' => Auth::user()->id,
+            'projector_id'=>$id,
+            'approved_by'=>0,
+        ]);
+
+        return back()->withStatus('Projector Booking request Submited');
+    }
+
+    public function requests($id)
+    {
+        $requests = Projector::find($id);
+
+        if($requests==null){
+            return back()->withError('Projector not found');
+        }
+
+        if(count($requests->requests)==0){
+            return back()->withError('No request found for this projector');
+        }
+
+        return view("pages.requests",['data'=>$requests->requests ]);
+    }
+
+    public function approve($id)
+    {
+        $booking = Booking::find($id);
+
+        if($booking==null){
+            return back()->withError('Request not found');
+        }
+        $booking->approved_by = Auth::user()->id;
+        $booking->save();
+
+        return back()->withStatus('Request approved succesfully');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -109,8 +153,14 @@ class BookingController extends Controller
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy($id)
     {
-        //
+        Booking::where('id',$id)->delete();
+        return back()->withStatus('Request revoked');
+    }
+
+
+    public function reports(){
+        return ['wow'=>'fuck'];
     }
 }

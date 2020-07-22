@@ -12,32 +12,22 @@
                 {{ row.return_to?'returned':'not returned' }}
             </span>
             <span slot="action" slot-scope="{row}" :key="row.id">
-              <div class="dropdown">
-                <a
-                  class="btn btn-sm btn-icon-only text-light"
-                  href="#"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-ellipsis-v"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                  <span
-                    class="dropdown-item"
+
+
+                   <span
+                    class=""
                     @click="selectedBooking=row"
                   >
                   <form :action="'booking/'+row.id" method="post">
                     <input type="hidden" name="_method" value="put">
                     <input type="hidden" name="_token" :value="csrf">
-                    <button class="btn btn-link" type="submit">
+                    <button class="btn btn-primary btn-sm" type="submit">
                         Recieve
                     </button>
                   </form>
                   </span>
-                </div>
-              </div>
+
+
             </span>
           </v-client-table>
         </div>
@@ -50,26 +40,14 @@
           <v-client-table v-if="filteredProjectors" :data="filteredProjectors" :columns="columns">
             <span slot="department" slot-scope="{row}">{{ row.department?row.department.name :''}}</span>
             <span slot="action" slot-scope="{row}" :key="row.id">
-              <div class="dropdown">
-                <a
-                  class="btn btn-sm btn-icon-only text-light"
-                  href="#"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-ellipsis-v"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+
                   <a
-                    class="dropdown-item"
+                    class="btn btn-primary btn-sm"
                     @click="selectedProjector=row"
                     data-toggle="modal"
                     data-target="#book"
                   >Book</a>
-                </div>
-              </div>
+
             </span>
           </v-client-table>
 

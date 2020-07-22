@@ -44,4 +44,8 @@ class User extends Authenticatable
     public function department(){
         return $this->belongsTo(Department::class);
     }
+
+    public function projectors(){
+        return $this->hasMany(Booking::class);
+    }
 }

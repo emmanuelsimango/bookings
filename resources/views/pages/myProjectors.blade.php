@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'table', 'titlePage' => __('Table List'),'pageSlug'=>__('projector')])
+@extends('layouts.app', ['activePage' => 'table', 'titlePage' => __('Table List'),'pageSlug'=>__('myProjectors')])
 
 @section('content')
 <div class="content">
@@ -9,8 +9,8 @@
                     <div class="card-header card-header-primary row">
                         <div class="col-8">
 
-                            <h4 class="card-title ">Projectors</h4>
-                            <p class="card-category"> Here is a list of all projectors</p>
+                            <h4 class="card-title ">My Projectors history</h4>
+                            <p class="card-category"> Here is a list of all projectors i have booked</p>
                         </div>
                         @if(Auth::user()->role_id==1)
                             <div class="col-4 text-right">
@@ -36,42 +36,34 @@
                                         Department
                                     </th>
                                     <th>
-                                        Availability
+                                        Status
                                     </th>
                                     <th>
-                                        Action
+                                        Date
                                     </th>
 
                                 </thead>
                                 <tbody>
-                                    @foreach ($projectors as $index=>$projector)
+                                    @foreach (Auth::user()->projectors as $index=>$booking)
 
                                     <tr>
                                         <td>
                                             {{ ++$index }}
                                         </td>
                                         <td>
-                                            {{ $projector->name }}
+                                            {{ $booking->projector->name }}
                                         </td>
                                         <td>
-                                            {{ $projector->serial }}
+                                            {{ $booking->projector->serial }}
                                         </td>
                                         <td>
-                                            {{ $projector->department->name??'' }}
+                                            {{ $booking->projector->department->name??'' }}
                                         </td>
                                         <td>
-                                            {{ $projector->available==null? 'Available':'Booked' }}
+                                            {{ $booking->returned_to>0? 'Returned':$booking->approved_by>0?"Still with me":'pending' }}
                                         </td>
                                         <td>
-                                            @if($projector->available==null)
-                                                @if(Auth::user()->role_id==1)
-                                                    [{{count($projector->requests)}}]<a href="booking/requests/{{ $projector->id }}">Requests</a>
-                                                @else
-                                                    <a href="projector/request/{{ $projector->id }}">Book the projector</a>
-                                                @endif
-                                            @else
-                                                <strong>Not available</strong>
-                                            @endif
+                                            {{$booking->created_at}}
                                         </td>
                                     </tr>
                                     @endforeach
@@ -79,7 +71,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $projectors->links() }}
                     </div>
                 </div>
             </div>

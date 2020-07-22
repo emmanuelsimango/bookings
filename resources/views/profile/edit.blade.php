@@ -30,7 +30,7 @@
                             placeholder="{{ __('Email address') }}" value="{{ old('email', $user->email??'') }}">
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
-                    @if($user->role_id==1)
+                    @if(Auth::user()->role_id==1)
                         <div class="form-group{{ $errors->has('department_id') ? ' has-danger' : '' }}">
                             <label>{{ __('Department') }}</label>
                             <select id="department_id" value="{{ old('department_id', $user->department_id??'') }}" class="form-control{{ $errors->has('department_id') ? ' is-invalid' : '' }}" name="department_id">

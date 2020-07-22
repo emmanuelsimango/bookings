@@ -26,10 +26,16 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
 		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'PageController@notifications']);
-		Route::resource('booking','BookingController',['names'=>['index'=>'booking']]);
-		Route::resource('projector', 'ProjectorController',['names'=>['index'=>'projector']]);
+        Route::resource('booking','BookingController',['names'=>['index'=>'booking']]);
+        Route::get('booking/requests/{projectorId}','BookingController@requests');
+        Route::get('booking/approve/{bookingId}','BookingController@approve');
+        Route::get('booking/reject/{bookingId}','BookingController@destroy');
+        Route::resource('projector', 'ProjectorController',['names'=>['index'=>'projector']]);
+        Route::get("projector/request/{id}",'BookingController@request');
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
-		Route::resource('department','DepartmentController',['names'=>['index'=>'department']]);
+        Route::resource('department','DepartmentController',['names'=>['index'=>'department']]);
+        Route::get('myProjectors','ProjectorController@myProjectors');
+        Route::get('reports','BookingController@reports');
 });
 
 Route::group(['middleware' => 'auth'], function () {

@@ -24,7 +24,7 @@ class Projector extends Model
         // var_dump($bookings);
         // die();
         foreach($bookings as $booking){
-            if($booking->returned_to == false){
+            if($booking->returned_to == false and $booking->approved_by > 0){
                 return true;
             }
         }
@@ -32,7 +32,11 @@ class Projector extends Model
     }
 
     public function available(){
-        return $this->hasOne(Booking::class)->where("returned_to",0);
+        return $this->hasOne(Booking::class)->where(["returned_to"=>0])->where("approved_by",">",0);
+    }
+
+    public function requests(){
+        return $this->hasMany(Booking::class)->where("approved_by",0);
     }
 
 }

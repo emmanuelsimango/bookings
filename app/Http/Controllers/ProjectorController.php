@@ -101,4 +101,8 @@ class ProjectorController extends Controller
     {
         //
     }
+
+    public function myProjectors(){
+        return view('pages.myProjectors');
+    }
 }

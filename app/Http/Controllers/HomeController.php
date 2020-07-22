@@ -26,10 +26,10 @@ class HomeController extends Controller
     public function index()
     {
         $data = array(
-            'bookings' => Booking::count(),
+            'bookings' => Booking::where(['returned_to'=>'0'])->where('approved_by','>',0)->count(),
             'users'=>User::count(),
             'projectors'=>Projector::count(),
-            'booked_projectors'=> Booking::where(['returned_to'=>'0'])->orderBy('id','desc')->get(),
+            'booked_projectors'=> Booking::where(['returned_to'=>'0'])->where('approved_by','>',0)->orderBy('id','desc')->get(),
             'available_projectors'=>Projector::orderBy('name')->get()
         );
         foreach($data['available_projectors'] as $index=>$projector){
