@@ -161,6 +161,39 @@ class BookingController extends Controller
 
 
     public function reports(){
-        return ['wow'=>'fuck'];
+        return view("pages.reports",['data'=>Booking::all(),'description'=>"all reports"]);
+    }
+
+    public function todayReports(){
+        $from = date('2018-01-01');
+        $to = date('Y-m-d');
+
+        $data = Booking::whereBetween('created_at', [$from, $to])->get();
+        return view("pages.reports",['data'=>$data,'description'=>"Tody's reports"]);
+    }
+
+    public function thisWeekReports(){
+        $from = date('2018-01-01');
+        $to = date('Y-m-d');
+
+        $data = Booking::whereBetween('created_at', [$from, $to])->get();
+        return view("pages.reports",['data'=>$data,'description'=>"Weekly reports"]);
+    }
+
+    public function thisMonthReports(){
+        $from = date('2018-01-01');
+        $to = date('Y-m-d');
+
+        $data = Booking::whereBetween('created_at', [$from, $to])->get();
+        return view("pages.reports",['data'=>$data,'description'=>"Monthly reports"]);
+    }
+
+    public function thisYearReports(){
+        $from = date('2020-07-22');
+        $to = date('Y-m-d');
+
+        $data = Booking::whereBetween('created_at', [$from, $to])->get();
+
+        return view("pages.reports",['data'=>$data,'description'=>"Yearly reports"]);
     }
 }

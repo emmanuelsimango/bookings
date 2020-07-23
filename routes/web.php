@@ -36,6 +36,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('department','DepartmentController',['names'=>['index'=>'department']]);
         Route::get('myProjectors','ProjectorController@myProjectors');
         Route::get('reports','BookingController@reports');
+        Route::get('reports/today','BookingController@todayReports');
+        Route::get('reports/thisWeek','BookingController@thisWeekReports');
+        Route::get('reports/thisMonth','BookingController@thisMonthReports');
+        Route::get('reports/thisYear','BookingController@thisYearReports');
 });
 
 Route::group(['middleware' => 'auth'], function () {

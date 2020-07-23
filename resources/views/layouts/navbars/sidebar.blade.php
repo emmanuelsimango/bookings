@@ -51,7 +51,7 @@
                     <p>{{ __('Projectors') }}</p>
                 </a>
             </li>
-            @if(Auth::user()->role_id>1)
+            @if(Auth::user()->role_id==3)
                 <li @if ($pageSlug == 'myProjectors') class="active " @endif>
                     <a href="/myProjectors">
                         <i class="tim-icons icon-planet"></i>

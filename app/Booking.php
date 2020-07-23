@@ -24,4 +24,8 @@ class Booking extends Model
         # code...
         return $this->belongsTo(Projector::class);
     }
+
+    public function returnedTo(){
+        return $this->belongsTo(User::class,'returned_to','id');
+    }
 }
