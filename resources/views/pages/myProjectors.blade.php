@@ -60,7 +60,15 @@
                                             {{ $booking->projector->department->name??'' }}
                                         </td>
                                         <td>
-                                            {{ $booking->returned_to>0? 'Returned':$booking->approved_by>0?"Still with me":'pending' }}
+                                            @if($booking->returned_to > 0)
+                                                Returned
+                                            @else
+                                                @if($booking->approved_by>0)
+                                                    Still with me
+                                                @else
+                                                    pending
+                                                @endif
+                                            @endif
                                         </td>
                                         <td>
                                             {{$booking->created_at}}
