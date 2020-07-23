@@ -7,6 +7,8 @@ use App\User;
 use App\Projector;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DateTime;
+use DateInterval;
 
 class BookingController extends Controller
 {
@@ -165,32 +167,36 @@ class BookingController extends Controller
     }
 
     public function todayReports(){
-        $from = date('2018-01-01');
-        $to = date('Y-m-d');
+        $from = new DateTime('now');
+        $from->sub(new DateInterval('P1D'));
+        $to = date('Y-m-d H:i:s');
 
         $data = Booking::whereBetween('created_at', [$from, $to])->get();
         return view("pages.reports",['data'=>$data,'description'=>"Tody's reports"]);
     }
 
     public function thisWeekReports(){
-        $from = date('2018-01-01');
-        $to = date('Y-m-d');
+        $from = new DateTime('now');
+        $from->sub(new DateInterval('P7D'));
+        $to = date('Y-m-d H:i:s');
 
         $data = Booking::whereBetween('created_at', [$from, $to])->get();
         return view("pages.reports",['data'=>$data,'description'=>"Weekly reports"]);
     }
 
     public function thisMonthReports(){
-        $from = date('2018-01-01');
-        $to = date('Y-m-d');
+        $from = new DateTime('now');
+        $from->sub(new DateInterval('P1M'));
+        $to = date('Y-m-d H:i:s');
 
         $data = Booking::whereBetween('created_at', [$from, $to])->get();
         return view("pages.reports",['data'=>$data,'description'=>"Monthly reports"]);
     }
 
     public function thisYearReports(){
-        $from = date('2020-07-22');
-        $to = date('Y-m-d');
+        $from = new DateTime('now');
+        $from->sub(new DateInterval('P1Y'));
+        $to = date('Y-m-d H:i:s');
 
         $data = Booking::whereBetween('created_at', [$from, $to])->get();
 
